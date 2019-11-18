@@ -2,6 +2,7 @@
 
 const db = require('../server/db')
 const {User} = require('../server/db/models')
+const {Dates} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
@@ -9,10 +10,29 @@ async function seed() {
 
   const users = await Promise.all([
     User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
+    User.create({email: 'murphy@email.com', password: '123'}),
+    User.create({email: 'tom@email.com', googleId: '110657798678729707111'}),
+    User.create({email: 'john@email.com', googleId: '110657798678729707222'}),
+    User.create({email: 'larry@email.com', googleId: '110657798678729707333'})
+  ])
+  const dates = await Promise.all([
+    Dates.create({date: '2019-12-23', userId: 5}),
+    Dates.create({date: '2019-12-24', userId: 5}),
+    Dates.create({date: '2019-12-25', userId: 5}),
+    Dates.create({date: '2019-12-26', userId: 5}),
+    Dates.create({date: '2020-01-23', userId: 3}),
+    Dates.create({date: '2020-01-24', userId: 3}),
+    Dates.create({date: '2020-01-25', userId: 3}),
+    Dates.create({date: '2020-01-26', userId: 3}),
+    Dates.create({date: '2020-01-25', userId: 4}),
+    Dates.create({date: '2020-01-26', userId: 4}),
+    Dates.create({date: '2020-01-27', userId: 4}),
+    Dates.create({date: '2020-01-28', userId: 4}),
+    Dates.create({date: '2020-01-28', userId: 6})
   ])
 
   console.log(`seeded ${users.length} users`)
+  console.log(`seeded ${dates.length} dates`)
   console.log(`seeded successfully`)
 }
 
